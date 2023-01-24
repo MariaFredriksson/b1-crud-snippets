@@ -1,18 +1,18 @@
 /**
  * The routes.
  *
- * @author Maria Fredriksson & Mats Loock
+ * @author Maria Fredriksson
  * @version 1.0.0
  */
 
 import express from 'express'
 import { router as homeRouter } from './home-router.js'
-import { router as snippetsRouter } from './snippets-router.js'
+// import { router as snippetsRouter } from './snippets-router.js'
 
 export const router = express.Router()
 
 router.use('/', homeRouter)
-router.use('/snippets', snippetsRouter)
+// router.use('/snippets', snippetsRouter)
 
 //* If any url is requested that doesn't match the above, there will be an error
 router.use('*', (req, res, next) => {

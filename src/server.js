@@ -1,7 +1,7 @@
 /**
  * The starting point of the application.
  *
- * @author Maria Fredriksson & Mats Look
+ * @author Maria Fredriksson
  * @version 1.0.0
  */
 
