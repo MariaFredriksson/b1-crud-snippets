@@ -15,6 +15,10 @@ import { fileURLToPath } from 'node:url'
 import { router } from './routes/router.js'
 import { connectDB } from './config/mongoose.js'
 
+// TODO: Ta bort sen
+console.log('PORT:', process.env.PORT)
+console.log('Anslutningssträng:', process.env.DB_CONNECTION_STRING)
+
 try {
   // Connect to MongoDB.
   await connectDB()
@@ -114,16 +118,21 @@ try {
         .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
     }
 
+    // TODO: Kommentera tillbaka detta
     // 500 Internal Server Error (in production, all other errors send this response).
-    if (req.app.get('env') !== 'development') {
-      //* Sets a status of 500 to the response object, and sends a file that is located in views/errors folder
-      return res
-        .status(500)
-        .sendFile(join(directoryFullName, 'views', 'errors', '500.html'))
-    }
+    // if (req.app.get('env') !== 'development') {
+    //   //* Sets a status of 500 to the response object, and sends a file that is located in views/errors folder
+    //   return res
+    //     .status(500)
+    //     .sendFile(join(directoryFullName, 'views', 'errors', '500.html'))
+    // }
 
     // Development only!
     // Only providing detailed error in development.
+
+    // TODO: Ta bort detta
+    console.log(baseURL)
+    console.error(err)
 
     // Render the error page.
     res
