@@ -1,5 +1,5 @@
 /**
- * Tasks routes.
+ * Snippets routes.
  *
  * @author Maria Fredriksson
  * @version 1.0.0
