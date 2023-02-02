@@ -12,7 +12,6 @@ const schema = new mongoose.Schema({
   snippettext: {
     type: String,
     required: true,
-    trim: true,
     minLength: 1,
     maxLength: 1000
   },
@@ -36,7 +35,7 @@ const schema = new mongoose.Schema({
      * @param {object} doc - The mongoose document which is being converted.
      * @param {object} ret - The plain object representation which has been converted.
      */
-    //* Deletes _id and _v from the returned object
+    //* Deletes _id and _v from the returned object. They exist in the database, but not in the code that we get back from the database
     transform: function (doc, ret) {
       delete ret._id
       delete ret.__v

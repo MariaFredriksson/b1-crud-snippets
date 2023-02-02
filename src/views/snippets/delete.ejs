@@ -2,12 +2,11 @@
 <form class="row g-3" method="post" action="./snippets/<%= viewData?.id %>/delete">
   <input type="hidden" name="id" value="<%= viewData?.id %>" />
   <div class="col-md-12">
-    <label class="form-label" for="snippetInput">
+    <label class="form-label" for="snippetTextarea">
       Snippet
     </label>
-    <input type="text" class="form-control" id="snippetInput"
-      placeholder="Update snippet here" value="<%= viewData?.snippettext %>"
-      disabled />
+    <textarea type="text" class="form-control" id="snippetTextarea" rows="10"
+      disabled><%= viewData?.snippettext %></textarea>
   </div>
   <div class="col-12">
     <button type="submit" class="btn btn-primary" autofocus="autofocus">Delete</button>

@@ -64,6 +64,7 @@ export class SnippetsController {
 
       //* If the save was successful, the code continues here and sends a flash message to the user
       req.session.flash = { type: 'success', text: 'The snippet was created successfully.' }
+      //* Sends the user back to the page snippets/
       res.redirect('.')
 
       //* If there is an error during the save, the code goes here
@@ -103,7 +104,7 @@ export class SnippetsController {
       const snippet = await Snippet.findById(req.params.id)
 
       if (snippet) {
-        snippet.description = req.body.description
+        snippet.snippettext = req.body.snippettext
         snippet.done = req.body.done === 'on'
 
         await snippet.save()
