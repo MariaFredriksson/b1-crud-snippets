@@ -20,9 +20,30 @@ export class AuthorizationController {
    *
    * @returns {undefined}
    */
-  async authorizeLoggedin (req, res, next) {
+  async ifNOTLoggedIn (req, res, next) {
     // If the user is not logged in
     if (!req.session.user) {
+      const error = new Error('Forbidden')
+      error.status = 403
+      return next(error)
+    }
+
+    // If the user is logged in
+    next()
+  }
+
+  /**
+   * Middleware to check if the user is authorized to access the resource.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   *
+   * @returns {undefined}
+   */
+  async ifLoggedIn (req, res, next) {
+    // If the user is not logged in
+    if (req.session.user) {
       const error = new Error('Forbidden')
       error.status = 403
       return next(error)
