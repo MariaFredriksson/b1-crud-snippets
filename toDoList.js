@@ -4,7 +4,6 @@
 // Snygga till alla kommentarer
 
 // Felhantering:
-// Gör en snygg hantering av 403 - if-sats i server.js + en ejs
 // ^^ Använda paketet http error...?
 
 // server.js:

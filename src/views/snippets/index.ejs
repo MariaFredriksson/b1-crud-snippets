@@ -18,8 +18,10 @@
             <%= snippet.author %>
           </td>
           <td class="text-nowrap">
-            <a href="./snippets/<%= snippet.id %>/update">Update</a>
-            <a href="./snippets/<%= snippet.id %>/delete">Delete</a>
+            <% if (typeof user !== 'undefined' && user === snippet.author) { %>
+              <a class="btn btn-secondary" href="./snippets/<%= snippet.id %>/update" role="button">Update</a>
+              <a class="btn btn-secondary" href="./snippets/<%= snippet.id %>/delete" role="button">Delete</a>
+            <% } %>
           </td>
         </tr>
       <% } %>

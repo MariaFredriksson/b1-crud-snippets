@@ -13,15 +13,21 @@
         <li class="nav-item">
           <a class="nav-link" href="./snippets/">Snippets</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./snippets/create">Create snippet</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./users/login">Log in</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./users/logout">Log out</a>
-        </li>
+        <% if (typeof user !== 'undefined') { %>
+          <li class="nav-item">
+            <a class="nav-link" href="./snippets/create">Create snippet</a>
+          </li>
+        <% } %>
+        <% if (typeof user ==='undefined' ) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="./users/login">Log in</a>
+          </li>
+        <% } %>
+        <% if (typeof user !=='undefined' ) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="./users/logout">Log out</a>
+          </li>
+        <% } %>
       </ul>
     </div>
   </nav>
