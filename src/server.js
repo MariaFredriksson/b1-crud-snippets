@@ -96,6 +96,17 @@ try {
       delete req.session.flash
     }
 
+    if (req.session.user) {
+      //* Copies the user message so it can be accessed in views
+      res.locals.user = req.session.user
+
+      console.log(req.session.user)
+
+      // ! Kan jag ta bort delete såhär...?
+      // ^^ Och lägga den vid logout istället...?
+      // delete req.session.user
+    }
+
     // Pass the base URL to the views.
     res.locals.baseURL = baseURL
 

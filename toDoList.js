@@ -3,12 +3,12 @@
 
 // Felhantering:
 // Skapa felhantering för när för långa snippets läggs till. Det som skrivs sist i error message är: "is longer than the maximum allowed length (1000)."
+// Gör en snygg hantering av 403 - if-sats i server.js + en ejs
 
 // server.js:
 // Kommentera tillbaka en del av felhanteringen
 
 // Inloggning mm:
-// Möjlighet att logga ut
 // Meddelande till användaren att användarnamn eller lösenord inte stämmer - EJ specificera vad exakt det är - visa ett flash-meddelande + skicka en 401 Unauthorized
 
 // Vad ska hända?
@@ -17,9 +17,6 @@
 // Logga in --> läsa snippets + flash "Welcome username!"
 
 // Inloggning:
-// Knapp logga in
-// Knapp logga ut
 // (Efter implementation av att skicka 403 etc) Dölja de olika knapparna beroende på inloggad eller ej
 
 // Om jag hinner:
-// Skriva Welcome username i flash vid inloggning och create?

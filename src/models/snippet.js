@@ -19,7 +19,6 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    default: 'No author',
     minLength: 1,
     maxLength: 25
   }

@@ -71,8 +71,8 @@ export class UsersController {
         // Vad sk hända när användaren har loggat in?
 
         // Skicka med något för att säga att användaren är inloggad...?
-        //! Går det text att sätta något eget påhitta såhär:
-        // req.session.loggedin = true
+        // ^^ Går det text att sätta något eget påhitta såhär:
+        req.session.user = user.username
 
         // Testar
         req.session.flash = { type: 'success', text: 'Welcome ' + user.username }
@@ -110,7 +110,11 @@ export class UsersController {
         }
         //! Hur kan jag veta att cookien verkligen har tagits bort?
         res.clearCookie('connect.sid')
-        req.session.flash = { type: 'success', text: 'Bye, bye!' }
+
+        // ^^ Är det vettigt att lägga denna delete här...? Nope... Sessionen tas ju bort
+        // delete req.session.user
+
+        // req.session.flash = { type: 'success', text: 'Bye, bye!' }
         res.redirect('..')
       })
     } catch (error) {

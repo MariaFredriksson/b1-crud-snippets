@@ -16,7 +16,7 @@ const controller = new SnippetsController()
 
 router.get('/', (req, res, next) => controller.index(req, res, next))
 
-router.get('/create', (req, res, next) => controller.create(req, res, next))
+router.get('/create', controller.authorize, controller.create)
 router.post('/create', (req, res, next) => controller.createPost(req, res, next))
 
 router.get('/:id/update', (req, res, next) => controller.update(req, res, next))

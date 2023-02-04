@@ -57,7 +57,9 @@ export class SnippetsController {
     try {
       const snippet = new Snippet({
         //* Takes the snippettext from the request body and sets it as snippettext in the new snippet
-        snippettext: req.body.snippettext
+        snippettext: req.body.snippettext,
+        // ^^ Can I add the author like this...? Yes
+        author: req.session.user
       })
 
       await snippet.save()
@@ -156,5 +158,26 @@ export class SnippetsController {
       req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./delete')
     }
+  }
+
+  /**
+   * Middleware to check if the user is authorized to access the resource.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   *
+   * @returns {undefined}
+   */
+  authorize (req, res, next) {
+    // If the user is not logged in
+    if (!req.session.user) {
+      const error = new Error('Forbidden')
+      error.status = 403
+      return next(error)
+    }
+
+    // If the user is authorized
+    next()
   }
 }
