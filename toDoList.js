@@ -1,11 +1,13 @@
 // Generellt:
-// Ska helmet användas...?
+// Ska helmet användas...? Ja! Förhindra CSURF o XXS
 
 // Felhantering:
 // Skapa felhantering för när för långa snippets läggs till. Det som skrivs sist i error message är: "is longer than the maximum allowed length (1000)."
 // Gör en snygg hantering av 403 - if-sats i server.js + en ejs
 // ^^ Använda paketet http error...?
 // ^^ Ska post i router också ha authorization...?
+// Ska något hända om jag är inloggad och försöker logga in igen, och samma med logga ut...?
+// Om användarnamnet redan finns "E11000 duplicate key error collection: test.users index: username_1 dup key: { username: "Maria" }"
 
 // server.js:
 // Kommentera tillbaka en del av felhanteringen
@@ -23,3 +25,4 @@
 
 // Om jag hinner:
 // Formatera snippets som kod
+// Hantera om användarnamn är likadana fast i stora eller små bokstäver - lägga in kontroll i schemat user tex

@@ -17,10 +17,10 @@ const controller = new SnippetsController()
 router.get('/', (req, res, next) => controller.index(req, res, next))
 
 router.get('/create', controller.authorizeLoggedin, controller.create)
-router.post('/create', (req, res, next) => controller.createPost(req, res, next))
+router.post('/create', controller.authorizeLoggedin, controller.createPost)
 
 router.get('/:id/update', controller.authorizeUser, controller.update)
-router.post('/:id/update', (req, res, next) => controller.updatePost(req, res, next))
+router.post('/:id/update', controller.authorizeUser, controller.updatePost)
 
 router.get('/:id/delete', controller.authorizeUser, controller.delete)
-router.post('/:id/delete', (req, res, next) => controller.deletePost(req, res, next))
+router.post('/:id/delete', controller.authorizeUser, controller.deletePost)

@@ -37,9 +37,12 @@ export class UsersController {
 
       await user.save()
 
-      req.session.flash = { type: 'success', text: 'Welcome ' + user.username }
+      req.session.flash = { type: 'success', text: `Welcome ${user.username}!` }
       res.redirect('./login')
     } catch (error) {
+      if (error.message.includes('E11000 duplicate key error collection')) {
+        error.message = 'The username is already taken. Please try another one.'
+      }
       //* Displays an error flash message to the user
       req.session.flash = { type: 'danger', text: error.message }
       //* Redirects the user to the create page, so they can try again
@@ -75,13 +78,12 @@ export class UsersController {
         req.session.user = user.username
 
         // Testar
-        req.session.flash = { type: 'success', text: 'Welcome ' + user.username }
+        req.session.flash = { type: 'success', text: `Welcome ${user.username}!` }
         res.redirect('../snippets')
       })
     } catch (error) {
-      // Vad ska hända om användaren inte kan logga in?
-      // Skicka en 401?
-      // Lägga ut info i login-formuläret?
+      req.session.flash = { type: 'danger', text: 'Login failed. Please try again' }
+      res.redirect('./login')
     }
   }
 
@@ -121,16 +123,6 @@ export class UsersController {
       next(error)
     }
   }
-
-  // authorize (req, res, next) {
-  //   // If the user is not authorized to this resource
-  //   if () {
-
-  //   }
-
-  //   // If the user is authorized
-  //   next()
-  // }
 }
 
 // Använda paketet http error för att kasta undantag vid authorize fel

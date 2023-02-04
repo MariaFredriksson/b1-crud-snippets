@@ -96,6 +96,10 @@ try {
       delete req.session.flash
     }
 
+    if (req.session) {
+      console.log('There is a session')
+    }
+
     if (req.session.user) {
       //* Copies the user message so it can be accessed in views
       res.locals.user = req.session.user

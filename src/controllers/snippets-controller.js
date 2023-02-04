@@ -71,6 +71,9 @@ export class SnippetsController {
 
       //* If there is an error during the save, the code goes here
     } catch (error) {
+      if (error.message.includes('is longer than the maximum allowed length (1000)')) {
+        error.message = 'The snippet is longer than the maximum allowed length (1000).'
+      }
       //* Displays an error flash message to the user
       req.session.flash = { type: 'danger', text: error.message }
       //* Redirects the user to the create page, so they can try again
