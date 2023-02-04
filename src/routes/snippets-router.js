@@ -21,8 +21,8 @@ router.get('/', (req, res, next) => controller.index(req, res, next))
 router.get('/create', authorizationController.userLoggedIn, controller.create)
 router.post('/create', authorizationController.userLoggedIn, controller.createPost)
 
-router.get('/:id/update', authorizationController.userIsAuthor, controller.update)
-router.post('/:id/update', authorizationController.userIsAuthor, controller.updatePost)
+router.get('/:id/update', authorizationController.userLoggedIn, authorizationController.userIsAuthor, controller.update)
+router.post('/:id/update', authorizationController.userLoggedIn, authorizationController.userIsAuthor, controller.updatePost)
 
-router.get('/:id/delete', authorizationController.userIsAuthor, controller.delete)
-router.post('/:id/delete', authorizationController.userIsAuthor, controller.deletePost)
+router.get('/:id/delete', authorizationController.userLoggedIn, authorizationController.userIsAuthor, controller.delete)
+router.post('/:id/delete', authorizationController.userLoggedIn, authorizationController.userIsAuthor, controller.deletePost)

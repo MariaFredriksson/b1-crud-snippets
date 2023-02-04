@@ -16,7 +16,6 @@
 // Kommer till startsidan - finns möjlighet att kolla på snippets eller logga in
 
 // Inloggning:
-// (Efter implementation av att skicka 403 etc) Dölja de olika knapparna beroende på inloggad eller ej
 
 // Om jag hinner:
 // Formatera snippets som kod
