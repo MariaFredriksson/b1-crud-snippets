@@ -4,6 +4,8 @@
 // Felhantering:
 // Skapa felhantering för när för långa snippets läggs till. Det som skrivs sist i error message är: "is longer than the maximum allowed length (1000)."
 // Gör en snygg hantering av 403 - if-sats i server.js + en ejs
+// ^^ Använda paketet http error...?
+// ^^ Ska post i router också ha authorization...?
 
 // server.js:
 // Kommentera tillbaka en del av felhanteringen
@@ -20,3 +22,4 @@
 // (Efter implementation av att skicka 403 etc) Dölja de olika knapparna beroende på inloggad eller ej
 
 // Om jag hinner:
+// Formatera snippets som kod
