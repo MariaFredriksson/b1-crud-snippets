@@ -169,15 +169,20 @@ export class SnippetsController {
    *
    * @returns {undefined}
    */
-  authorize (req, res, next) {
-    // If the user is not logged in
-    if (!req.session.user) {
-      const error = new Error('Forbidden')
-      error.status = 403
-      return next(error)
-    }
+  async authorize (req, res, next) {
+    try {
+      const snippet = await Snippet.findById(req.params.id)
 
-    // If the user is authorized
-    next()
+      // If the user is not logged in or if the user is not the author
+      if (!req.session.user || req.session.user !== snippet.author) {
+        const error = new Error('Forbidden')
+        error.status = 403
+        return next(error)
+      } else {
+        next()
+      }
+    } catch (error) {
+      next(error)
+    }
   }
 }
