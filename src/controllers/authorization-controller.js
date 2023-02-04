@@ -44,8 +44,8 @@ export class AuthorizationController {
   async userNOTLoggedIn (req, res, next) {
     // If the user is logged in
     if (req.session.user) {
-      const error = new Error('Not found')
-      error.status = 404
+      const error = new Error('Forbidden')
+      error.status = 403
       return next(error)
     }
 

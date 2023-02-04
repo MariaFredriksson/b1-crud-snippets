@@ -10,12 +10,9 @@
 // Kommentera tillbaka en del av felhanteringen
 
 // Inloggning mm:
-// Meddelande till användaren att användarnamn eller lösenord inte stämmer - EJ specificera vad exakt det är - visa ett flash-meddelande + skicka en 401 Unauthorized
 
 // Vad ska hända?
 // Kommer till startsidan - finns möjlighet att kolla på snippets eller logga in
-
-// Inloggning:
 
 // Om jag hinner:
 // Formatera snippets som kod
