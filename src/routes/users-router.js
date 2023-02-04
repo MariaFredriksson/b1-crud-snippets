@@ -15,13 +15,13 @@ const controller = new UsersController()
 const authorizationController = new AuthorizationController()
 
 // ^^ Kan allt bara gå dit...?
-router.get('/', authorizationController.ifLoggedIn, controller.login)
+router.get('/', authorizationController.userNOTLoggedIn, controller.login)
 
-router.get('/create', authorizationController.ifLoggedIn, controller.create)
-router.post('/create', authorizationController.ifLoggedIn, controller.createPost)
+router.get('/create', authorizationController.userNOTLoggedIn, controller.create)
+router.post('/create', authorizationController.userNOTLoggedIn, controller.createPost)
 
-router.get('/login', authorizationController.ifLoggedIn, controller.login)
-router.post('/login', authorizationController.ifLoggedIn, controller.loginPost)
+router.get('/login', authorizationController.userNOTLoggedIn, controller.login)
+router.post('/login', authorizationController.userNOTLoggedIn, controller.loginPost)
 
-router.get('/logout', authorizationController.ifNOTLoggedIn, controller.logout)
-router.post('/logout', authorizationController.ifNOTLoggedIn, controller.logoutPost)
+router.get('/logout', authorizationController.userLoggedIn, controller.logout)
+router.post('/logout', authorizationController.userLoggedIn, controller.logoutPost)

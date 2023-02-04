@@ -133,6 +133,13 @@ try {
         .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
     }
 
+    // 403 Forbidden.
+    if (err.status === 403) {
+      return res
+        .status(403)
+        .sendFile(join(directoryFullName, 'views', 'errors', '403.html'))
+    }
+
     // TODO: Kommentera tillbaka detta
     // 500 Internal Server Error (in production, all other errors send this response).
     // if (req.app.get('env') !== 'development') {

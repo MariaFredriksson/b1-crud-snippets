@@ -18,11 +18,11 @@ const authorizationController = new AuthorizationController()
 
 router.get('/', (req, res, next) => controller.index(req, res, next))
 
-router.get('/create', authorizationController.ifNOTLoggedIn, controller.create)
-router.post('/create', authorizationController.ifNOTLoggedIn, controller.createPost)
+router.get('/create', authorizationController.userLoggedIn, controller.create)
+router.post('/create', authorizationController.userLoggedIn, controller.createPost)
 
-router.get('/:id/update', authorizationController.authorizeUser, controller.update)
-router.post('/:id/update', authorizationController.authorizeUser, controller.updatePost)
+router.get('/:id/update', authorizationController.userIsAuthor, controller.update)
+router.post('/:id/update', authorizationController.userIsAuthor, controller.updatePost)
 
-router.get('/:id/delete', authorizationController.authorizeUser, controller.delete)
-router.post('/:id/delete', authorizationController.authorizeUser, controller.deletePost)
+router.get('/:id/delete', authorizationController.userIsAuthor, controller.delete)
+router.post('/:id/delete', authorizationController.userIsAuthor, controller.deletePost)

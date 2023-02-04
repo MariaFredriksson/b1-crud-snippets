@@ -20,7 +20,7 @@ export class AuthorizationController {
    *
    * @returns {undefined}
    */
-  async ifNOTLoggedIn (req, res, next) {
+  async userLoggedIn (req, res, next) {
     // If the user is not logged in
     if (!req.session.user) {
       const error = new Error('Forbidden')
@@ -41,15 +41,15 @@ export class AuthorizationController {
    *
    * @returns {undefined}
    */
-  async ifLoggedIn (req, res, next) {
-    // If the user is not logged in
+  async userNOTLoggedIn (req, res, next) {
+    // If the user is logged in
     if (req.session.user) {
       const error = new Error('Forbidden')
       error.status = 403
       return next(error)
     }
 
-    // If the user is logged in
+    // If the user is not logged in
     next()
   }
 
@@ -62,7 +62,7 @@ export class AuthorizationController {
    *
    * @returns {undefined}
    */
-  async authorizeUser (req, res, next) {
+  async userIsAuthor (req, res, next) {
     try {
       const snippet = await Snippet.findById(req.params.id)
 
