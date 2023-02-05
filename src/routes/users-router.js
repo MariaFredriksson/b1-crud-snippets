@@ -1,5 +1,5 @@
 /**
- * Snippets routes.
+ * Users routes.
  *
  * @author Maria Fredriksson
  * @version 1.0.0
@@ -14,8 +14,7 @@ export const router = express.Router()
 const controller = new UsersController()
 const authorizationController = new AuthorizationController()
 
-// ^^ Kan allt bara gå dit...?
-router.get('/', authorizationController.userNOTLoggedIn, controller.login)
+router.get('/', (req, res, next) => controller.index(req, res, next))
 
 router.get('/create', authorizationController.userNOTLoggedIn, controller.create)
 router.post('/create', authorizationController.userNOTLoggedIn, controller.createPost)

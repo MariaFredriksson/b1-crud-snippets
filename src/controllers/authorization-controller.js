@@ -12,7 +12,7 @@ import { Snippet } from '../models/snippet.js'
  */
 export class AuthorizationController {
   /**
-   * Middleware to check if the user is authorized to access the resource.
+   * Middleware to check if the user is logged in and thereby authorized to access the resource.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -33,7 +33,7 @@ export class AuthorizationController {
   }
 
   /**
-   * Middleware to check if the user is authorized to access the resource.
+   * Middleware to check if the user is NOT logged in and thereby authorized to access the resource.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -54,7 +54,7 @@ export class AuthorizationController {
   }
 
   /**
-   * Middleware to check if the user is authorized to access the resource.
+   * Middleware to check if the user is the author and thereby authorized to access the resource.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.

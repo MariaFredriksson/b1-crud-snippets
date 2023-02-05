@@ -1,14 +1,11 @@
 // Generellt:
-// Ska helmet användas...? Ja! Förhindra CSURF o XXS
-// Skriva JSDOC
-// Snygga till alla kommentarer
-// Ta bort överflödiga kommentarer
+// Ska jag lägga till statuskoder vid redirect mm...?
 
 // Felhantering:
 // ^^ Använda paketet http error...?
 
 // server.js:
-// Kommentera tillbaka en del av felhanteringen
+// Eventuellt fixa till kommentarer
 
 // Inloggning mm:
 

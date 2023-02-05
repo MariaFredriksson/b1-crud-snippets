@@ -12,7 +12,17 @@ import { User } from '../models/user.js'
  */
 export class UsersController {
   /**
-   * TODO: Skriv nåt bra här.
+   * Handles the index route for the users. Redirects to login.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   */
+  index (req, res) {
+    res.redirect('./users/login')
+  }
+
+  /**
+   * Handles the create route for the users.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -22,7 +32,7 @@ export class UsersController {
   }
 
   /**
-   * TODO: Skriv nåt bra här.
+   * Creates a new user account in the system.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -48,15 +58,15 @@ export class UsersController {
         error.message = 'The username is too long. Please try something shorter than 50 characters.'
       }
 
-      //* Displays an error flash message to the user
       req.session.flash = { type: 'danger', text: error.message }
-      //* Redirects the user to the create page, so they can try again
+
+      // Redirects the user to the create page, so they can try again
       res.redirect('./create')
     }
   }
 
   /**
-   * TODO: Skriv nåt bra här.
+   * Handles the login route for the users.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -66,7 +76,7 @@ export class UsersController {
   }
 
   /**
-   * TODO: Skriv nåt bra här.
+   * Handles the logic for a user logging in to the application.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -74,15 +84,11 @@ export class UsersController {
   async loginPost (req, res) {
     try {
       const user = await User.authenticate(req.body.username, req.body.password)
-      console.log(`User.username: ${user.username}`)
-      req.session.regenerate(() => {
-        // Vad sk hända när användaren har loggat in?
 
-        console.log(`User.username: ${user.username}`)
-        // Skicka med något för att säga att användaren är inloggad...?
-        // ^^ Går det text att sätta något eget påhitta såhär:
+      // Makes sure that there is a new fresh session when logging in
+      req.session.regenerate(() => {
+        // Save the username in the session so it can be accessed from everywhere during the session.
         req.session.user = user.username
-        console.log(`req.session.user: ${req.session.user}`)
 
         // Make sure the session is saved before everything else
         req.session.save(() => {
@@ -100,7 +106,7 @@ export class UsersController {
   }
 
   /**
-   * TODO: Skriv nåt bra här.
+   * Renders the logout page.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -110,7 +116,7 @@ export class UsersController {
   }
 
   /**
-   * TODO: Skriv nåt bra här.
+   * Destroys the user's session when the user is logging out.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -122,13 +128,7 @@ export class UsersController {
         if (err) {
           throw err
         }
-        //! Hur kan jag veta att cookien verkligen har tagits bort?
         res.clearCookie('connect.sid')
-
-        // ^^ Är det vettigt att lägga denna delete här...? Nope... Sessionen tas ju bort
-        // delete req.session.user
-
-        // req.session.flash = { type: 'success', text: 'Bye, bye!' }
         res.redirect('..')
       })
     } catch (error) {
@@ -136,16 +136,3 @@ export class UsersController {
     }
   }
 }
-
-// Använda paketet http error för att kasta undantag vid authorize fel
-
-// CRUD anteckningar från handledning
-// Skapa egen route fil
-// Login vy (login när man ska logga in och log ut när man ska logga ut)
-// Separera
-// Controllerkoden måste exekveras när knappen klickas på av användaren
-// Om det går bra så ska vi skapa en session
-
-// Sista steget är om anvävsteb ska kunna. Vad i applikationen kräver att user är inloggade? Styrs i routsen. Om du inte är inloggad så är routsen skyddade, tex create. Authorise. Vilken typ av användare är du? Admin, premium? If satsen. Äger användaren snippet? Inloggad = skapa snippet. If sats kompletteras med kontroll, äger användaren snippets. Då kan hen också redigera eller ta bort.
-
-// 404, men för vanliga användare är det bättre att dölja knappar också när de ändå inte kan använda dem. Kan testa först att ha alla knappar synliga för att testa felkoderna, för att sedan dölja/ta bort knapparna. Olika felkoder beroende på situation.

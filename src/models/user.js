@@ -35,11 +35,12 @@ userSchema.pre('save', async function () {
 })
 
 /**
- * TODO: skriv nåt bra här.
+ * Authenticates a user with the given `username` and `password`.
  *
- * @param {string} username - ...
- * @param {string} password - ...
- * @returns {string} ...
+ * @param {string} username - The username to search for.
+ * @param {string} password - The password to verify.
+ * @throws {Error} If no user was found with the given `username`, or if the password is incorrect.
+ * @returns {object} The authenticated user.
  */
 userSchema.statics.authenticate = async function (username, password) {
   const user = await this.findOne({ username })

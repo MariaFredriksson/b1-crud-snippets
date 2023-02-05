@@ -16,11 +16,11 @@ router.use('/', homeRouter)
 router.use('/snippets', snippetsRouter)
 router.use('/users', usersRouter)
 
-//* If any url is requested that doesn't match the above, there will be an error
+// If any url is requested that doesn't match the above, there will be an error
 router.use('*', (req, res, next) => {
   const error = new Error('Not Found')
   error.status = 404
 
-  //* Sends the errror to the the next middleware, which will trigger the error handler
+  // Sends the errror to the the next middleware, which will trigger the error handler
   next(error)
 })
