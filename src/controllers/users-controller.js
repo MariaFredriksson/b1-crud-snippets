@@ -43,6 +43,11 @@ export class UsersController {
       if (error.message.includes('E11000 duplicate key error collection')) {
         error.message = 'The username is already taken. Please try another one.'
       }
+
+      if (error.message.includes('is longer than the maximum allowed length (50)')) {
+        error.message = 'The username is too long. Please try something shorter than 50 characters.'
+      }
+
       //* Displays an error flash message to the user
       req.session.flash = { type: 'danger', text: error.message }
       //* Redirects the user to the create page, so they can try again
@@ -88,7 +93,7 @@ export class UsersController {
         })
       })
     } catch (error) {
-      req.session.flash = { type: 'danger', text: 'Login failed. Please try again' }
+      req.session.flash = { type: 'danger', text: 'Login failed. Please try again.' }
       res.status(401)
       res.redirect('./login')
     }

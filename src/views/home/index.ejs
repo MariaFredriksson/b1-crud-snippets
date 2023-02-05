@@ -4,72 +4,47 @@
     <h1 class="display-3">
       B1 - CRUD
     </h1>
-    <p>
-      Hi from home!
-    </p>
-    <p>
-      <a class="btn btn-primary btn-lg" href="https://rawgit.com/1dv023/syllabus/master/lectures/03/index.html" role="button">
-        Byt till något annat...? »
+    <br>
+    <div>
+      <a class="btn btn-primary" href="./snippets" role="button">
+        View all snippets
+      </a>      
+      <a class="btn btn-primary" href="./users/login" role="button">
+        Log in
       </a>
-    </p>
-  </div>
-</div>
-<div class="container">
-  <!-- Example row of columns -->
-  <div class="row">
-    <div class="col-md-3">
-      <h2>
-        Hej1
-      </h2>
-      <p>
-        Bla bla bla...
-      </p>
-      <p>
-        <a class="btn btn-secondary" href="#" role="button">
-          View details »
-        </a>
-      </p>
-    </div>
-    <div class="col-md-3">
-      <h2>
-        PRG
-      </h2>
-      <p>
-        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      </p>
-      <p>
-        <a class="btn btn-secondary" href="#" role="button">
-          View details »
-        </a>
-      </p>
-    </div>
-    <div class="col-md-3">
-      <h2>
-        Session
-      </h2>
-      <p>
-        Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-      </p>
-      <p>
-        <a class="btn btn-secondary" href="#" role="button">
-          View details »
-        </a>
-      </p>
-    </div>
-    <div class="col-md-3">
-      <h2>
-        Flash messages
-      </h2>
-      <p>
-        Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-      </p>
-      <p>
-        <a class="btn btn-secondary" href="#" role="button">
-          View details »
-        </a>
-      </p>
     </div>
   </div>
-  <hr />
 </div>
-<!-- /container -->
+<br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <h2>The three most recently added snippets:</h2>
+    </tr>
+  </thead>
+  <tbody>
+    <% if (viewData?.snippets?.length) { %>
+      <% let counter = 0 %>
+      <% for (const snippet of viewData.snippets.reverse()) { %>
+        <% if (counter === 3) break %>
+        <tr>
+          <td class="w-100" style="white-space: pre-wrap">
+            <%= snippet.snippettext %>
+          </td>
+          <td>
+            <a class="btn btn-primary" href="./snippets" role="button">
+              View all snippets
+            </a>
+          </td>
+        </tr>
+        <% counter++ %>
+      <% } %>
+    <% } else { %>
+      <tr>
+        <td colspan="3" class="text-center text-danger">
+          There are no snippets to display
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
