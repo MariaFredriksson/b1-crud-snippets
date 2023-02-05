@@ -123,6 +123,9 @@ export class SnippetsController {
       }
       res.redirect('..')
     } catch (error) {
+      if (error.message.includes('is longer than the maximum allowed length (1000)')) {
+        error.message = 'The snippet is longer than the maximum allowed length (1000).'
+      }
       req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./update')
     }

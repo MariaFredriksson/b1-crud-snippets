@@ -8,10 +8,12 @@
     <div>
       <a class="btn btn-primary" href="./snippets" role="button">
         View all snippets
-      </a>      
-      <a class="btn btn-primary" href="./users/login" role="button">
-        Log in
-      </a>
+      </a>   
+      <% if (typeof user==='undefined' ) { %>
+        <a class="btn btn-primary" href="./users/login" role="button">
+          Log in
+        </a>
+      <% } %>
     </div>
   </div>
 </div>

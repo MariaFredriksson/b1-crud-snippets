@@ -20,7 +20,7 @@ export class AuthorizationController {
    *
    * @returns {undefined}
    */
-  async userLoggedIn (req, res, next) {
+  userLoggedIn (req, res, next) {
     // If the user is not logged in
     if (!req.session.user) {
       const error = new Error('Not found')
@@ -41,7 +41,7 @@ export class AuthorizationController {
    *
    * @returns {undefined}
    */
-  async userNOTLoggedIn (req, res, next) {
+  userNOTLoggedIn (req, res, next) {
     // If the user is logged in
     if (req.session.user) {
       const error = new Error('Forbidden')
