@@ -28,7 +28,7 @@
       <% for (const snippet of viewData.snippets.reverse()) { %>
         <% if (counter === 3) break %>
         <tr>
-          <td class="w-100" style="white-space: pre-wrap">
+          <td class="w-100" id="snippettext-area">
             <%= snippet.snippettext %>
           </td>
           <td>
