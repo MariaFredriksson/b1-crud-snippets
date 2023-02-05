@@ -65,24 +65,31 @@ export class UsersController {
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
-   * @param {Function} next - Express next middleware function.
    */
-  async loginPost (req, res, next) {
+  async loginPost (req, res) {
     try {
       const user = await User.authenticate(req.body.username, req.body.password)
+      console.log(`User.username: ${user.username}`)
       req.session.regenerate(() => {
         // Vad sk hända när användaren har loggat in?
 
+        console.log(`User.username: ${user.username}`)
         // Skicka med något för att säga att användaren är inloggad...?
         // ^^ Går det text att sätta något eget påhitta såhär:
         req.session.user = user.username
+        console.log(`req.session.user: ${req.session.user}`)
 
-        // Testar
-        req.session.flash = { type: 'success', text: `Welcome ${user.username}!` }
-        res.redirect('../snippets')
+        // Make sure the session is saved before everything else
+        req.session.save(() => {
+          req.session.flash = { type: 'success', text: `Welcome ${user.username}!` }
+          console.log(`req.session.flash: ${req.session.flash}`)
+          res.status(200)
+          res.redirect('../snippets')
+        })
       })
     } catch (error) {
       req.session.flash = { type: 'danger', text: 'Login failed. Please try again' }
+      res.status(401)
       res.redirect('./login')
     }
   }

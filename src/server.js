@@ -8,12 +8,13 @@
 import express from 'express'
 //* Imports the middleware for Express so that ejs layouts can be used
 import expressLayouts from 'express-ejs-layouts'
-import session from 'express-session'
+import session, { MemoryStore } from 'express-session'
 import logger from 'morgan'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { router } from './routes/router.js'
 import { connectDB } from './config/mongoose.js'
+import cors from 'cors'
 
 // TODO: Ta bort sen
 console.log('PORT:', process.env.PORT)
@@ -25,6 +26,15 @@ try {
 
   // Creates an Express application.
   const expressApp = express()
+
+  //* Bestämmer varifrån jag accepterar kakor
+  const allow = ['http://localhost', 'http://cscloud7-221.lnu.se', 'https://cscloud7-221.lnu.se']
+  expressApp.options('*', cors({
+    origin: allow,
+    credentials: true,
+    preflightContinue: true,
+    optionsSuccessStatus: 204
+  }))
 
   // Get the directory name of this module's path.
   const directoryFullName = dirname(fileURLToPath(import.meta.url))
@@ -61,12 +71,13 @@ try {
   const sessionOptions = {
     name: process.env.SESSION_NAME, // Don't use default session cookie name.
     secret: process.env.SESSION_SECRET, // Change it!!! The secret is used to hash the session with HMAC.
-    resave: false, // Resave even if a request is not changing the session.
+    resave: true,
     saveUninitialized: false, // Don't save a created but not modified session.
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 1 day
       sameSite: 'strict'
-    }
+    },
+    store: new MemoryStore()
   }
 
   //* If the app is in production, extra layers of security are added
@@ -91,6 +102,7 @@ try {
   expressApp.use((req, res, next) => {
     // Flash messages - survives only a round trip.
     if (req.session.flash) {
+      console.log(`Flash: ${req.session.flash}`)
       //* Copies the flash message so it can be accessed in views
       res.locals.flash = req.session.flash
       delete req.session.flash
@@ -98,6 +110,8 @@ try {
 
     if (req.session) {
       console.log('There is a session')
+      console.log(req.session)
+      console.log(`User: ${req.session.user}`)
     }
 
     if (req.session.user) {
