@@ -37,7 +37,7 @@ export class UsersController {
 
       await user.save()
 
-      req.session.flash = { type: 'success', text: `Welcome ${user.username}!` }
+      req.session.flash = { type: 'success', text: `Welcome ${user.username}! Your account was successfully created. Please log in.` }
       res.redirect('./login')
     } catch (error) {
       if (error.message.includes('E11000 duplicate key error collection')) {
